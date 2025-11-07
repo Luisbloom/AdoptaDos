@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animales>
+  <animal id="a001">
+    <nombre>Luna</nombre>
+    <especie>Gato</especie>
+    <raza>Europeo</raza>
+    <edad>2</edad>
+    <sexo>Hembra</sexo>
+    <descripcion>Dulce y tranquila. Le gusta el sofá y las caricias suaves.</descripcion>
+  </animal>
+  <animal id="a002">
+    <nombre>Rocky</nombre>
+    <especie>Perro</especie>
+    <raza>Labrador</raza>
+    <edad>4</edad>
+    <sexo>Macho</sexo>
+    <descripcion>Enérgico, juguetón y muy obediente. Ideal para familias activas.</descripcion>
+  </animal>
+  <animal id="a003">
+    <nombre>Coco</nombre>
+    <especie>Conejo</especie>
+    <raza>Enano</raza>
+    <edad>1</edad>
+    <sexo>Macho</sexo>
+    <descripcion>Tímido al principio, pero muy curioso. Necesita espacio seguro.</descripcion>
+  </animal>
+</animales>
