@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adoptados>
+    <parejas>
+        <pareja id="p1">
+            <nombre1>Laura</nombre1>
+            <nombre2>Carlos</nombre2>
+            <ciudad>Madrid</ciudad>
+            <correo>laura.carlos@example.com</correo>
+        </pareja>
+        <pareja id="p2">
+            <nombre1>María</nombre1>
+            <nombre2>Jorge</nombre2>
+            <ciudad>Sevilla</ciudad>
+            <correo>maria.jorge@example.com</correo>
+        </pareja>
+    </parejas>
+
+    <animales>
+        <animal id="a1">
+            <nombre>Luna</nombre>
+            <especie>Perro</especie>
+            <raza>Labrador</raza>
+            <edad>3</edad>
+            <sexo>Hembra</sexo>
+        </animal>
+        <animal id="a2">
+            <nombre>Milo</nombre>
+            <especie>Gato</especie>
+            <raza>Europeo común</raza>
+            <edad>2</edad>
+            <sexo>Macho</sexo>
+        </animal>
+        <animal id="a3">
+            <nombre>Rocky</nombre>
+            <especie>Perro</especie>
+            <raza>Bulldog francés</raza>
+            <edad>4</edad>
+            <sexo>Macho</sexo>
+        </animal>
+    </animales>
+
+    <adopciones>
+        <adopcion>
+            <parejaRef>p1</parejaRef>
+            <animalRef>a2</animalRef>
+            <fecha>2025-05-12</fecha>
+        </adopcion>
+        <adopcion>
+            <parejaRef>p2</parejaRef>
+            <animalRef>a1</animalRef>
+            <fecha>2025-06-03</fecha>
+        </adopcion>
+    </adopciones>
+</adoptados>

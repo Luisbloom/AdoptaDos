@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>AdoptaDos - Portal de adopción para parejas</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<header>
+    <h1>🐾 AdoptaDos 🐾</h1>
+    <p>El portal donde las parejas encuentran a su nuevo compañero peludo</p>
+</header>
+
+<main>
+    <!-- Aquí se insertará el contenido generado por la transformación XSLT -->
+    <div id="contenido"></div>
+</main>
+
+<footer>
+    &copy; 2025 AdoptaDos - Proyecto de adopción conjunta
+</footer>
+
+<script>
+    // Carga del XML y XSL para mostrar los datos transformados
+    window.onload = function() {
+        const xmlFile = "datos.xml";
+        const xslFile = "transformacion.xsl";
+
+        if (window.ActiveXObject || "ActiveXObject" in window) {
+            // Para Internet Explorer
+            const xml = new ActiveXObject("Microsoft.XMLDOM");
+            const xsl = new ActiveXObject("Microsoft.XMLDOM");
+            xml.async = false;
+            xsl.async = false;
+            xml.load(xmlFile);
+            xsl.load(xslFile);
+            document.getElementById("contenido").innerHTML = xml.transformNode(xsl);
+        } else if (document.implementation && document.implementation.createDocument) {
+            // Para navegadores modernos
+            Promise.all([
+                fetch(xmlFile).then(res => res.text()),
+                fetch(xslFile).then(res => res.text())
+            ])
+            .then(([xmlText, xslText]) => {
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(xmlText, "text/xml");
+                const xsl = parser.parseFromString(xslText, "text/xml");
+
+                const xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xsl);
+                const resultDocument = xsltProcessor.transformToFragment(xml, document);
+                document.getElementById("contenido").appendChild(resultDocument);
+            })
+            .catch(err => console.error("Error cargando los archivos XML/XSL:", err));
+        }
+    };
+</script>
+
+</body>
+</html>
