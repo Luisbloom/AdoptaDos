@@ -1,61 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>AdoptaDos - Portal de adopción para parejas</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐾 Adopta en Pareja</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
 </head>
 <body>
+  <header>
+    <h1>🐾 Adopta en Pareja</h1>
+    <p>Responsabilidad compartida, amor multiplicado.</p>
+  </header>
 
-<header>
-    <h1>🐾 AdoptaDos 🐾</h1>
-    <p>El portal donde las parejas encuentran a su nuevo compañero peludo</p>
-</header>
+  <main>
+    <div class="acciones">
+      <a href="registro-usuario.html" class="btn btn-usr">👤 Registrar Usuario</a>
+      <a href="registro-animal.html" class="btn btn-animal">🐶 Registrar Animal</a>
+      <a href="adopcion-pareja.html" class="btn btn-adop">❤️ Adoptar en Pareja</a>
+      <a href="ver-gestion.html" class="btn btn-ver">📊 Ver y Gestionar</a>
+    </div>
+  </main>
 
-<main>
-    <!-- Aquí se insertará el contenido generado por la transformación XSLT -->
-    <div id="contenido"></div>
-</main>
-
-<footer>
-    &copy; 2025 AdoptaDos - Proyecto de adopción conjunta
-</footer>
-
-<script>
-    // Carga del XML y XSL para mostrar los datos transformados
-    window.onload = function() {
-        const xmlFile = "datos.xml";
-        const xslFile = "transformacion.xsl";
-
-        if (window.ActiveXObject || "ActiveXObject" in window) {
-            // Para Internet Explorer
-            const xml = new ActiveXObject("Microsoft.XMLDOM");
-            const xsl = new ActiveXObject("Microsoft.XMLDOM");
-            xml.async = false;
-            xsl.async = false;
-            xml.load(xmlFile);
-            xsl.load(xslFile);
-            document.getElementById("contenido").innerHTML = xml.transformNode(xsl);
-        } else if (document.implementation && document.implementation.createDocument) {
-            // Para navegadores modernos
-            Promise.all([
-                fetch(xmlFile).then(res => res.text()),
-                fetch(xslFile).then(res => res.text())
-            ])
-            .then(([xmlText, xslText]) => {
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(xmlText, "text/xml");
-                const xsl = parser.parseFromString(xslText, "text/xml");
-
-                const xsltProcessor = new XSLTProcessor();
-                xsltProcessor.importStylesheet(xsl);
-                const resultDocument = xsltProcessor.transformToFragment(xml, document);
-                document.getElementById("contenido").appendChild(resultDocument);
-            })
-            .catch(err => console.error("Error cargando los archivos XML/XSL:", err));
-        }
-    };
-</script>
-
+  <footer>
+    <p>© 2025 Adopta en Pareja — Proyecto de Lenguaje de Marcas</p>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🐶 Registrar Animal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <header><h1>🐶 Registrar Animal</h1></header>
+  <nav><a href="index.html">← Volver al inicio</a></nav>
+  <main>
+    <form id="formAnimal">
+      <label>Nombre: <input type="text" name="nomAnimal" required></label>
+      <label>Especie:
+        <select name="especie" required>
+          <option value="">--</option>
+          <option value="Perro">Perro</option>
+          <option value="Gato">Gato</option>
+          <option value="Conejo">Conejo</option>
+        </select>
+      </label>
+      <label>Raza: <input type="text" name="raza"></label>
+      <label>Edad (años): <input type="number" name="edad" min="0" required></label>
+      <label>Descripción: <textarea name="descripcion" rows="2"></textarea></label>
+      <button type="submit" class="btn">✅ Registrar Animal</button>
+    </form>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📊 Ver y Gestionar Adopciones</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>📊 Ver y Gestionar Adopciones</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Inicio</a></li>
+      <li><a href="registro-usuario.html">📝 Registrar Usuario</a></li>
+      <li><a href="registro-animal.html">🐶 Registrar Animal</a></li>
+      <li><a href="adopcion-pareja.html">❤️ Adoptar en Pareja</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="nota">
+      Esta página carga el archivo <code>data/adopciones.xml</code> y aplica la transformación <code>xslt/adopciones.xsl</code>.
+      <br>⚠️ Debe ejecutarse con un servidor HTTP (ej. <code>npx serve</code>).
+    </div>
+
+    <div id="visor">
+      <p>Cargando datos desde XML…</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Adopta en Pareja — Proyecto de Lenguaje de Marcas</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const visor = document.getElementById('visor');
+      if (!visor) return;
+
+      // Función principal para procesar el XML
+      function procesarXML(xmlStr) {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlStr, "application/xml");
+        
+        // Verificar errores en XML
+        const parserError = xml.querySelector("parsererror");
+        if (parserError) {
+          visor.innerHTML = `
+            <div class="error">
+              <h3>❌ Error en adopciones.xml</h3>
+              <p>${parserError.textContent}</p>
+              <p>Revisa la estructura del XML generado.</p>
+            </div>`;
+          console.error("XML parse error:", parserError.textContent);
+          return;
+        }
+
+        // Cargar y aplicar XSLT
+        fetch('xslt/adopciones.xsl')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`XSLT no encontrado o error HTTP: ${response.status}`);
+            }
+            return response.text();
+          })
+          .then(xslStr => {
+            const xsl = parser.parseFromString(xslStr, "application/xml");
+            const xslError = xsl.querySelector("parsererror");
+            if (xslError) {
+              throw new Error(`Error en adopciones.xsl: ${xslError.textContent}`);
+            }
+
+            // Aplicar transformación
+            const xsltProcessor = new XSLTProcessor();
+            xsltProcessor.importStylesheet(xsl);
+            const resultDocument = xsltProcessor.transformToFragment(xml, document);
+
+            // Limpiar y mostrar resultado
+            visor.innerHTML = '';
+            visor.appendChild(resultDocument);
+            
+            console.log("✅ XML y XSLT cargados y transformados con éxito.");
+          })
+          .catch(err => {
+            visor.innerHTML = `
+              <div class="error">
+                <h3>❌ Error en la transformación XSLT</h3>
+                <p><strong>Mensaje:</strong> ${err.message}</p>
+                <p>Verifica que <code>xslt/adopciones.xsl</code> exista y sea válido.</p>
+              </div>`;
+            console.error("XSLT error:", err);
+          });
+      }
+
+      // Paso 1: Intentar cargar desde localStorage (más rápido, datos actualizados)
+      let xmlStr = localStorage.getItem('adopciones.xml');
+      
+      if (xmlStr) {
+        console.log("✅ Cargando XML desde localStorage");
+        visor.innerHTML = '<p>✅ Cargando datos desde caché…</p>';
+        setTimeout(() => procesarXML(xmlStr), 100);
+      } 
+      // Paso 2: Si no hay en localStorage, cargar desde data/adopciones.xml
+      else {
+        console.log("🔄 Cargando XML desde data/adopciones.xml");
+        visor.innerHTML = '<p>🔄 Cargando datos desde data/adopciones.xml…</p>';
+        
+        fetch('data/adopciones.xml')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`No se pudo cargar data/adopciones.xml: ${response.status} ${response.statusText}`);
+            }
+            return response.text();
+          })
+          .then(xmlContent => {
+            // Guardar en localStorage para futuras visitas
+            localStorage.setItem('adopciones.xml', xmlContent);
+            console.log("✅ XML guardado en localStorage");
+            procesarXML(xmlContent);
+          })
+          .catch(err => {
+            visor.innerHTML = `
+              <div class="error">
+                <h3>❌ No se pudo cargar los datos</h3>
+                <p><strong>Error:</strong> ${err.message}</p>
+                <p>Asegúrate de que:</p>
+                <ul>
+                  <li>El archivo <code>data/adopciones.xml</code> existe</li>
+                  <li>Estás usando un servidor HTTP (ej. <code>npx serve</code>)</li>
+                </ul>
+              </div>`;
+            console.error("Fetch XML error:", err);
+          });
+      }
+    });
+  </script>
+</body>
+</html>
