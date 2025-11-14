@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="portal.xsl"?>
+<pagina>
+  <metadata>
+    <titulo>AdopTados — Parejas</titulo>
+    <pagina>parejas</pagina>
+    <tituloSeccion>👥 Gestión de Parejas</tituloSeccion>
+  </metadata>
+  <contenido>
+    <parejas>
+      <pareja id="p1">
+        <nombres>Luis Pablos &amp; Ana García</nombres>
+        <registro>2025-10-15</registro>
+      </pareja>
+      <pareja id="p2">
+        <nombres>Carlos Ruiz &amp; Marta López</nombres>
+        <registro>2025-11-01</registro>
+      </pareja>
+    </parejas>
+  </contenido>
+</pagina>
