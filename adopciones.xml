@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="adopciones.xsl"?>
+<adopciones xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="adopciones.xsd">
+  
+  <!-- Parejas registradas -->
+  <parejas>
+    <pareja id="p1">
+      <persona1>
+        <nombre>Luis</nombre>
+        <apellido>Pablos</apellido>
+        <email>luis@example.com</email>
+      </persona1>
+      <persona2>
+        <nombre>Ana</nombre>
+        <apellido>García</apellido>
+        <email>ana@example.com</email>
+      </persona2>
+      <fechaRegistro>2025-10-15</fechaRegistro>
+    </pareja>
+    
+    <pareja id="p2">
+      <persona1>
+        <nombre>Carlos</nombre>
+        <apellido>Ruiz</apellido>
+        <email>carlos@example.com</email>
+      </persona1>
+      <persona2>
+        <nombre>Marta</nombre>
+        <apellido>López</apellido>
+        <email>marta@example.com</email>
+      </persona2>
+      <fechaRegistro>2025-11-01</fechaRegistro>
+    </pareja>
+  </parejas>
+
+  <!-- Animales disponibles -->
+  <animales>
+    <animal id="a1" estado="disponible">
+      <nombre>Rocky</nombre>
+      <especie>Perro</especie>
+      <raza>Labrador</raza>
+      <edad>3</edad>
+      <descripcion>Amigable, vacunado y esterilizado.</descripcion>
+    </animal>
+    
+    <animal id="a2" estado="disponible">
+      <nombre>Luna</nombre>
+      <especie>Gato</especie>
+      <raza>Europeo</raza>
+      <edad>2</edad>
+      <descripcion>Tímida al principio, pero muy cariñosa.</descripcion>
+    </animal>
+    
+    <animal id="a3" estado="adoptado">
+      <nombre>Max</nombre>
+      <especie>Conejo</especie>
+      <raza>Enano</raza>
+      <edad>1</edad>
+      <descripcion>Le encanta comer zanahorias.</descripcion>
+    </animal>
+  </animales>
+
+  <!-- Adopciones realizadas -->
+  <adopciones-realizadas>
+    <adopcion id="ad1">
+      <idPareja>p2</idPareja>
+      <idAnimal>a3</idAnimal>
+      <fecha>2025-11-10</fecha>
+    </adopcion>
+  </adopciones-realizadas>
+</adopciones>
